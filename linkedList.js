@@ -20,12 +20,14 @@ class Linked_list {
         this.length++;
     }
 
+
     prepend(value) {
         const newNode = new Node(value);
         newNode.next = this.head;
         this.head = newNode;
         this.length++;
     }
+
 
     insert(index, value) {
         if (index <= 0) {
@@ -43,21 +45,43 @@ class Linked_list {
 
         newNode.next = currNode.next;
         currNode.next = newNode;
-
         this.length++;
     }
 
+
     remove(index) {
-        
         let currNode = this.head;
+
         for (let i = 0; i < index-1; i++) {
             currNode = currNode.next;
         }
 
         currNode.next = currNode.next.next;
-
         this.length--;
     }
+
+
+    reverse() {
+
+        if (this.head.next == null) {
+            return this;
+        }
+
+        let first = this.head;
+        this.tail = this.head;
+        let second = first.next;
+
+        while (second) {
+            let temp = second.next
+            second.next = first;
+            first = second;
+            second = temp; 
+        }
+
+        this.head.next = null;
+        this.head = first;
+    }
+
 
     printList() {
         let currNode = this.head;
@@ -75,10 +99,17 @@ const my_Linked_List = new Linked_list(10);
 my_Linked_List.append(20);
 my_Linked_List.append(30);
 my_Linked_List.append(40);
+
 my_Linked_List.prepend(50);
 
 my_Linked_List.insert(1,15);
 
-my_Linked_List.remove(10);
+my_Linked_List.remove(5);
+
+my_Linked_List.printList();
+
+my_Linked_List.reverse();
+
+console.log("-----SWAP----");
 
 my_Linked_List.printList();
